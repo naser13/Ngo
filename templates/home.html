@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% for news in News %}
+        {% include 'components/i_news.html' %}
+    {% endfor %}
+{% endblock %}

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from news.models import News
+from news.views import *
 
 
 class Admin(models.Model):#modire site
@@ -9,6 +11,13 @@ class Admin(models.Model):#modire site
         super().__init__(*args, **kwargs)
         self.user.is_staff = True
         self.user.is_superuser = True
+
+    def get_all_news(self):
+        return News.objects.all()
+
+    def get_all_new_news(self):
+        return News.objects.filter(status='نا مشخص')
+
 
 
 class Expert(models.Model):#karshenas
@@ -26,6 +35,8 @@ class Expert(models.Model):#karshenas
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user.is_staff = True
+
+
 
 
 class NGO (models.Model):

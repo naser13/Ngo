@@ -3,7 +3,13 @@ from persons.models import Expert, NGO
 
 
 class News(models.Model):
-    is_important = models.BooleanField(default=False)
+    Categories = (
+        ('n', 'نامشخص'),
+        ('i', 'مهم'),
+        ('r', 'معمولی'),
+    )
+
+    status = models.CharField(default='n', max_length=1, choices=Categories)
     author = models.ForeignKey(Expert)
     date = models.DateField(auto_now_add=True) #have to change to jalali calender
     text = models.TextField() #It is better for text to be as a text file because the valume of the text is alot

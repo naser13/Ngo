@@ -1,0 +1,25 @@
+#news_image{
+    float: right;
+    height: 100%;
+    padding-left: 10px;
+
+    
+}
+a{
+    text-decoration: none;
+}
+#table{
+    float: right;
+}
+#line{
+    width: 100%;
+}
+#news{
+    height: 120px;
+}
+#relative{
+    margin-top: 26px;
+}
+#container{
+    width: 980px;
+}
