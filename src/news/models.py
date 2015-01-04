@@ -8,7 +8,14 @@ class News(models.Model):
         ('i', 'مهم'),
         ('r', 'معمولی'),
     )
-
+    CATEGORIES = (
+        ('as', 'آسیا'),
+        ('er', 'اروپا'),
+        ('am', 'آمریکا'),
+        ('au', 'استرالیا و اقیانوسیه'),
+        ('af', 'آفریقا'),
+    )
+    continent = models.CharField(max_length=2,choices=CATEGORIES)
     status = models.CharField(default='n', max_length=1, choices=Categories)
     author = models.ForeignKey(Expert)
     date = models.DateField(auto_now_add=True) #have to change to jalali calender
