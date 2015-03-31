@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Admin(models.Model):
+class Admin(models.Model):#modire site
     user = models.OneToOneField(User)
 
     def __init__(self, *args, **kwargs):
@@ -11,7 +11,16 @@ class Admin(models.Model):
         self.user.is_superuser = True
 
 
-class Expert(models.Model):
+class Expert(models.Model):#karshenas
+    CATEGORIES = (
+        ('as', 'آسیا'),
+        ('er', 'اروپا'),
+        ('am', 'آمریکا'),
+        ('au', 'استرالیا و اقیانوسیه'),
+        ('af', 'آفریقا'),
+    )
+
+    continent = models.CharField(max_length=2,choices=CATEGORIES)
     user = models.OneToOneField(User)
 
     def __init__(self, *args, **kwargs):
@@ -19,8 +28,15 @@ class Expert(models.Model):
         self.user.is_staff = True
 
 
-class Person(models.Model):
-    user = models.OneToOneField(User)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class NGO (models.Model):
+    name = models.CharField(max_length=100)
+    CATEGORIES = (
+        ('as', 'آسیا'),
+        ('er', 'اروپا'),
+        ('am', 'آمریکا'),
+        ('au', 'استرالیا و اقیانوسیه'),
+        ('af', 'آفریقا'),
+    )
+    continent = models.CharField(max_length=2,choices=CATEGORIES)
+    title_picture = models.ImageField()
+    Website = models.CharField(max_length=50)
