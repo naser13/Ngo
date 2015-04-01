@@ -1,8 +1,9 @@
 from django.db import models
-from persons.models import Expert, Person,NGO
+from persons.models import Expert, NGO
 
 
 class News(models.Model):
+    is_important = models.BooleanField(default=False)
     author = models.ForeignKey(Expert)
     date = models.DateField(auto_now_add=True) #have to change to jalali calender
     text = models.TextField() #It is better for text to be as a text file because the valume of the text is alot
