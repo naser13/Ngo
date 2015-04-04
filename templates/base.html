@@ -21,8 +21,12 @@
             </div>
         </nav>
     </div>
-    {% block body %}
-    {% endblock %}
+    <div class="row">
+       {% include 'carousel.html' %}
+    </div>
+    <div class="row" >
+        {% include 'topNews.html' %}
+    </div>
 </div>
 
 </body>
