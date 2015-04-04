@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+    <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/editor.css">
+    <div class="row" dir="rtl"> عنوان :</div>
+    <div class="row" >
+        <div class="col-md-7"style="float:right;padding-right: 0px">
+            <input type="text"style="float:right;width: 100%">
+        </div>
+    </div>
+    <div class="row" dir="rtl">
+        توضیح کوتاه :
+    </div>
+    <div class="row">
+         <textarea rows="3" style="width: 100%;;"></textarea>
+    </div>
+    <div class="row" dir="rtl">
+        متن خبر :
+    </div>
+    <div class="row"> <div id="summernote" class="su">Hello Summernote</div></div>
+        <button id="click">click</button>
+        <script src="http://127.0.0.1:8000/static/js/edit.js"></script>
+
+{% endblock %}
+
+
+
+

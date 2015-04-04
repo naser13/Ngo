@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from news.models import News
-from news.views import *
+from src.news.models import News
+from src.Ngo.settings import MEDIA_ROOT
 
 
 class Admin(models.Model):#modire site
@@ -18,6 +18,14 @@ class Admin(models.Model):#modire site
     def get_all_new_news(self):
         return News.objects.filter(status='نا مشخص')
 
+    def get_all_important_news(self):
+        return News.objects.filter(satus='مهم')
+
+    def get_all_regular_news(self):
+        return News.objects.filter(status='معمولی')
+
+    # def delete_news(self,id):
+    #     return News.objects.
 
 
 class Expert(models.Model):#karshenas
@@ -37,8 +45,6 @@ class Expert(models.Model):#karshenas
         self.user.is_staff = True
 
 
-
-
 class NGO (models.Model):
     name = models.CharField(max_length=100)
     CATEGORIES = (
@@ -48,6 +54,7 @@ class NGO (models.Model):
         ('au', 'استرالیا و اقیانوسیه'),
         ('af', 'آفریقا'),
     )
+
     continent = models.CharField(max_length=2,choices=CATEGORIES)
-    title_picture = models.ImageField()
+    title_picture = models.FileField(upload_to= MEDIA_ROOT )
     Website = models.CharField(max_length=50)
