@@ -1,5 +1,5 @@
 from django.db import models
-from persons.models import Expert, NGO
+from src.persons.models import Expert, NGO
 
 
 class News(models.Model):
