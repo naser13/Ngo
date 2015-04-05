@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 from src.Ngo.settings import MEDIA_ROOT
 
 
-# class Admin(models.Model):#modire site
-#     user = models.OneToOneField(User)
-#
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.user.is_staff = True
-#         self.user.is_superuser = True
+class Admin(models.Model):#modire site
+    user = models.OneToOneField(User)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user.is_staff = True
+        self.user.is_superuser = True
 
     # def get_all_news(self):
     #     return News.objects.all()
@@ -55,6 +55,6 @@ class NGO (models.Model):
         ('af', 'آفریقا'),
     )
 
-    continent = models.CharField(max_length=2,choices=CATEGORIES)
-    title_picture = models.FileField(upload_to= MEDIA_ROOT )
+    continent = models.CharField(max_length=2, choices=CATEGORIES)
+    title_picture = models.FileField(upload_to=MEDIA_ROOT)
     Website = models.CharField(max_length=50)
