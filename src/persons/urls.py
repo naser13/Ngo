@@ -8,5 +8,4 @@ from django.conf.urls.static import static
 
 urlpatterns = patterns('persons.views',
                        url(r'^$', 'user_home', name='user-home'),
-                       
 )

@@ -1,6 +1,7 @@
 from django import forms
 from news.models import *
 from persons.models import *
+from news.models import *
 
 
 class SignupForm(forms.ModelForm):
@@ -11,3 +12,8 @@ class SignupForm(forms.ModelForm):
         model = Expert
         fields = ['username', 'password1', 'password2', 'email']
 
+
+class AddArticleForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['title', 'description', 'text', 'continent', 'title_image']

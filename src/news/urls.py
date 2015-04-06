@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from src.news.views import edit,example
+from news.views import edit,example,home
 
 urlpatterns = patterns('news.views',
                        url(r'^$', 'home', name='home'),

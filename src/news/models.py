@@ -1,5 +1,6 @@
 from django.db import models
 from src.persons.models import Expert, NGO
+from src.Ngo.settings import MEDIA_ROOT
 
 
 class News(models.Model):
@@ -15,13 +16,13 @@ class News(models.Model):
         ('au', 'استرالیا و اقیانوسیه'),
         ('af', 'آفریقا'),
     )
-    continent = models.CharField(max_length=2,choices=CATEGORIES)
+    continent = models.CharField(max_length=2, choices=CATEGORIES)
     status = models.CharField(default='n', max_length=1, choices=Categories)
-    author = models.ForeignKey(Expert)
     date = models.DateField(auto_now_add=True) #have to change to jalali calender
     text = models.TextField() #It is better for text to be as a text file because the valume of the text is alot
     description = models.CharField(max_length=100)
-    # ngo = models.ForeignKey(NGO)
+    title_image = models.FileField(upload_to=MEDIA_ROOT)
+    random_int = models.IntegerField()
 
 
 class Comment(models.Model):
