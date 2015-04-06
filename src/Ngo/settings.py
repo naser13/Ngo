@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'src.Ngo',
-    'src.Ngo.news',
+    # 'src.Ngo.news',
     'src.Ngo.persons',
 
 )
@@ -96,4 +96,4 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
-AUTH_USER_MODEL = 'persons.BaseUser'
+AUTH_USER_MODEL = 'persons.Expert'
