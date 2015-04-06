@@ -15,6 +15,7 @@ class News(models.Model):
         ('au', 'استرالیا و اقیانوسیه'),
         ('af', 'آفریقا'),
     )
+    title = models.CharField(max_length=50)
     continent = models.CharField(max_length=2, choices=CATEGORIES)
     status = models.CharField(default='n', max_length=1, choices=Categories)
     date = models.DateField(auto_now_add=True) #have to change to jalali calender

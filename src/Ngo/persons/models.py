@@ -1,15 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
-from Ngo.settings import MEDIA_ROOT
+from django.contrib.auth.models import User, AbstractUser
+from django.conf import settings
 
-
-class Admin(models.Model):#modire site
-    user = models.OneToOneField(User)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.user.is_staff = True
-        self.user.is_superuser = True
 
     # def get_all_news(self):
     #     return News.objects.all()
@@ -22,14 +14,20 @@ class Admin(models.Model):#modire site
     #
     # def get_all_regular_news(self):
     #     return News.objects.filter(status='معمولی')
-
+    #
     # def delete_news(self,id):
     #     return News.objects.re
-
+    #
     # def setstatus(self, number, status):
 
+class BaseUser(AbstractUser):
 
-class Expert(models.Model):#karshenas
+     class Meta:
+        verbose_name = 'کاربر'
+        verbose_name_plural = 'کاربران'
+
+
+class Expert(BaseUser):#karshenas
     CATEGORIES = (
         ('as', 'آسیا'),
         ('er', 'اروپا'),
@@ -38,12 +36,21 @@ class Expert(models.Model):#karshenas
         ('af', 'آفریقا'),
     )
 
-    continent = models.CharField(max_length=2,choices=CATEGORIES)
-    user = models.OneToOneField(User)
+    class Meta:
+        verbose_name = 'کاربر'
+        verbose_name_plural = 'کاربران'
+
+    continent = models.CharField(max_length=2, choices=CATEGORIES)
+
+    def __init__(self):
+        self.is_staff = True
+
+
+class Admin(BaseUser):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.user.is_staff = True
+        self.is_staff = True
+        self.is_superuser = True
 
 
 class NGO (models.Model):
@@ -57,5 +64,5 @@ class NGO (models.Model):
     )
 
     continent = models.CharField(max_length=2, choices=CATEGORIES)
-    title_picture = models.FileField(upload_to=MEDIA_ROOT)
+    title_picture = models.FileField(upload_to=settings.MEDIA_ROOT)
     Website = models.CharField(max_length=50)

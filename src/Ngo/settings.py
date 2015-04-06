@@ -37,8 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Ngo.news',
-    'Ngo.persons',
+    'src.Ngo',
+    'src.Ngo.news',
+    'src.Ngo.persons',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,3 +96,4 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+AUTH_USER_MODEL = 'persons.BaseUser'
