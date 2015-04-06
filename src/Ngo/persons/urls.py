@@ -6,6 +6,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-urlpatterns = patterns('persons.views',
+urlpatterns = patterns('Ngo.persons.views',
                        url(r'^$', 'user_home', name='user-home'),
 )

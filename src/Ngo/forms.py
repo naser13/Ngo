@@ -1,7 +1,6 @@
 from django import forms
-from news.models import *
-from persons.models import *
-from news.models import *
+from Ngo.persons.models import Expert
+from Ngo.news.models import News
 
 
 class SignupForm(forms.ModelForm):

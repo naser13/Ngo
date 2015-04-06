@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from src.persons.models import Expert
-from src.Ngo.forms import SignupForm
+from Ngo.forms import SignupForm
 
 
 def home(request):
