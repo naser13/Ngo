@@ -1,5 +1,4 @@
 from django.db import models
-from src.persons.models import Expert, NGO
 from src.Ngo.settings import MEDIA_ROOT
 
 

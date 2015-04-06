@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from src.news.models import News
-from src.Ngo.settings import MEDIA_ROOT
+from Ngo.settings import MEDIA_ROOT
 
 
 class Admin(models.Model):#modire site
@@ -12,17 +11,17 @@ class Admin(models.Model):#modire site
         self.user.is_staff = True
         self.user.is_superuser = True
 
-    def get_all_news(self):
-        return News.objects.all()
-
-    def get_all_new_news(self):
-        return News.objects.filter(status='نا مشخص')
-
-    def get_all_important_news(self):
-        return News.objects.filter(satus='مهم')
-
-    def get_all_regular_news(self):
-        return News.objects.filter(status='معمولی')
+    # def get_all_news(self):
+    #     return News.objects.all()
+    #
+    # def get_all_new_news(self):
+    #     return News.objects.filter(status='نا مشخص')
+    #
+    # def get_all_important_news(self):
+    #     return News.objects.filter(satus='مهم')
+    #
+    # def get_all_regular_news(self):
+    #     return News.objects.filter(status='معمولی')
 
     # def delete_news(self,id):
     #     return News.objects.re
