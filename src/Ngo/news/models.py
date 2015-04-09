@@ -53,3 +53,7 @@ class Answer(models.Model):
     comment = models.ForeignKey(Comment)
     name = models.CharField(max_length=20)
     text = models.TextField()
+
+
+class Photo(models.Model):
+    pic = models.FileField(upload_to=MEDIA_ROOT)

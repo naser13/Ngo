@@ -1,5 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render
-from Ngo.forms import SignupForm
+from Ngo.forms import SignupForm,AddPicForm
 
 
 def home(request):
@@ -7,8 +8,13 @@ def home(request):
 
 
 #@login_required() for Experts
-def edit(request):
-    return render(request, 'new_article.html', )
+def create_article(request):
+    if request.method == 'POST':
+        # form = AddPicForm(request.POST, request.FILES)
+        # form.save()
+        return HttpResponse("done")
+    form = AddPicForm()
+    return render(request, 'gallary.html', {'form': form})
 
 
 def example(request):

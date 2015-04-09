@@ -16,10 +16,18 @@
     <div class="row" dir="rtl">
         متن خبر :
     </div>
-    <div class="row"> <div id="summernote" class="su">Hello Summernote</div></div>
-        <button id="click">click</button>
-        <script src="http://127.0.0.1:8000/static/js/edit.js"></script>
+    <div class="row" dir="rtl">
+        تصویر عنوان:
+    </div>
 
+    <div class="row"> <div id="summernote" class="su">Hello Summernote</div></div>
+    <button id="click">click</button>
+    <script src="http://127.0.0.1:8000/static/js/edit.js"></script>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="sub" id="submit">
+    </form>
 {% endblock %}
 
 

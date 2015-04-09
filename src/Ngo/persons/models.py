@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import User
 from django.conf import settings
 
 
-class Expert(AbstractUser):#karshenas
+class Expert(User):#karshenas
     # CATEGORIES = (
     #     ('as', 'آسیا'),
     #     ('er', 'اروپا'),
@@ -20,7 +20,7 @@ class Expert(AbstractUser):#karshenas
         self.is_staff = True
 
 
-class Admin(Expert):
+class Admin(User):
 
     def __init__(self, *args, **kwargs):
         self.is_staff = True
