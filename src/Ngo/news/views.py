@@ -14,7 +14,7 @@ def create_article(request):
         # form.save()
         return HttpResponse("done")
     form = AddPicForm()
-    return render(request, 'gallary.html', {'form': form})
+    return render(request, 'new_article.html', {'form': form})
 
 
 def example(request):
