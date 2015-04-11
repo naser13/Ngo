@@ -4,8 +4,10 @@
     </div>
         <div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"></span> درباره ما</a></li>
-                <li><a href="#"></span> خانه</a></li>
+                {% block navBar_body %}
+                    <li><a href="#"></span> خروج</a></li>
+                    <li><a href="#"></span> </a></li>
+                {% endblock %}
             </ul>
         </div>
 </nav>
