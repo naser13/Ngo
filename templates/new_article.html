@@ -1,34 +1,62 @@
 {% extends 'base.html' %}
 {% block body %}
     <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/editor.css">
-    <div class="row" dir="rtl"> عنوان :</div>
-    <div class="row" >
-        <div class="col-md-7"style="float:right;padding-right: 0px">
-            <input type="text"style="float:right;width: 100%">
-        </div>
-    </div>
-    <div class="row" dir="rtl">
-        توضیح کوتاه :
-    </div>
-    <div class="row">
-         <textarea rows="3" style="width: 100%;;"></textarea>
-    </div>
-    <div class="row" dir="rtl">
-        متن خبر :
-    </div>
-    <div class="row" dir="rtl">
-        تصویر عنوان:
-    </div>
 
-    <div class="row"> <div id="summernote" class="su">Hello Summernote</div></div>
-    <button id="click">click</button>
     <script src="http://127.0.0.1:8000/static/js/edit.js"></script>
     <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+        <div class="row" dir="rtl"> عنوان :</div>
+        <div class="row" >
+            <div class="col-md-7"style="float:right;padding-right: 0px">
+                <input type="text"style="float:right;width: 100%" name="title">
+            </div>
+        </div>
+        <div class="row" dir="rtl">
+            توضیح کوتاه :
+        </div>
+        <div class="row">
+            <textarea name="description" rows="3" style="width: 100%;;"></textarea>
+        </div>
+        <div class="row" dir="rtl">
+            قاره :
+        </div>
+
+        <div class="row">
+            <div style="float:right;">
+                {{ form.continent }}
+            </div>
+        </div>
+        <div class="row" dir="rtl">
+           عکس عنوان :
+        </div>
+        <div class="row">
+            <div style="float:right;">
+                {{ form2.pic}}
+            </div>
+        </div>
+        <div class="row" dir="rtl">
+            متن اصلی:
+        </div>
+
+        <div class="row">
+{#            <input type="text" id="summernote" name="text" style="height: 300px">#}
+            {{ form.text }}
+        </div>
         <input type="submit" value="sub" id="submit">
     </form>
+
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,16 +1,33 @@
+{% load Math %}
+{% load set_var %}
 <div id="myCarousel" class="carousel slide col-md-8" data-ride="carousel" style="height: 300px;">
 
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
+
+                {% set a = 0 %}
+                {% for i in i_news %}
+                    {% if not a %}
+                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        {% set a = 1 %}
+                    {% else %}
+                        <li data-target="#myCarousel" data-slide-to="{{ a }}" class=""></li>
+                        {% set a = 2 %}
+                    {% endif %}
+                {% endfor %}
             </ol>
 
             <!-- Wrapper for slides -->
-
+            {% set flag = 0 %}
             <div class="carousel-inner" role="listbox">
                 {% for news in i_news %}
-                    {% include 'components/i_news.html' %}
+                    {% if not flag %}
+                        {% include 'components/i_news_active.html' %}
+                        {% set flag = 1 %}
+                        {% else %}
+                            {% include 'components/i_news.html' %}
+                    {% endif %}
+
                 {% endfor %}
             </div>
 
@@ -23,7 +40,7 @@
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-        </div>
+</div>
         <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading" id="panel-header"><span class="glyphicon glyphicon-globe"></span><div style="float: right">دسته بندی</div></div>

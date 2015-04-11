@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load date %}
 {% include 'head.html' %}
-
+<title>{% block page_title %}{% endblock %}</title>
 <body>
 
 <div class="container" id="container">
@@ -9,9 +10,29 @@
         <img src="cinqueterre.jpg" class="img-rounded" alt="Cinque Terre" id="TOP_IMAGE" width="100%" height="150">
     </div>
     <div class="row">
-        {% block nav_body %}
-            {% include 'navBarList.html' %}
-        {% endblock %}
+
+        <nav class="navbar navbar-inverse col-md-12" height="10">
+            <div class="navbar-header" style="color: #ffffff;">
+                <h4> {{ ali|jalali }}</h4>
+            </div>
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% block nav_list %}
+                            {% if not user.is_authenticated %}
+                                <li><a href="http://127.0.0.1:8000/"></span> خانه</a></li>
+                                <li><a href="http://127.0.0.1:8000/login"><span>ورود</span></a> </li>
+                                {% else %}
+                                    {% if user.is_superuser %}
+                                        <li><a href="http://127.0.0.1:8000/logout"></span> خروج</a></li>
+                                        <li><a href="http://127.0.0.1:8000/shownews"></span> اخبار جدید</a></li>
+                                        <li><a href="http://127.0.0.1:8000/editnews"></span> ویرایش اخبار</a></li>
+                                        {% else %}
+                                    {% endif %}
+                            {% endif %}
+                        {% endblock %}
+                    </ul>
+                </div>
+        </nav>
     </div>
     {% block body %}
     {% endblock %}

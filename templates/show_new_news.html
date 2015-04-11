@@ -1,18 +1,16 @@
 {% extends 'base.html' %}
-{% block nav_body %}
-    {% include 'components/admin_navbarList.html' %}
 {% block body %}
     <table border="0" class="col-md-8" id="table">
             <thead>
                 <tr>
                     <th>
                         <div align="right"> اخبار</div>
-                        <img id="line" style="" src="static/img/liine3.jpg" alt="">
+                        <img id="line" style="" src="http://127.0.0.1:8000/static/img/liine3.jpg" alt="">
                     </th>
                 </tr>
             </thead>
             <tbody>
-                {% for news in r_news %}
+                {% for news in n_news %}
                     {% include 'components/r_news.html' %}
                 {% endfor %}
             </tbody>

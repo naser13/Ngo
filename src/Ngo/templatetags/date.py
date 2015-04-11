@@ -1,9 +1,12 @@
 __author__ = 'root'
 from datetime import datetime
+from django import template
 
+register = template.Library()
 
+@register.filter(name='jalali')
 def persian_date(request):
-    date = datetime(2016, 3, 20)
+    date = datetime.now()
     today = datetime(2015, 3, 21)
     days = (date-today).days
     day = 1
@@ -34,6 +37,7 @@ def persian_date(request):
             year += 1
 
         days -= 1
+    mounths = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند']
 
     date3 = datetime(year, month, day)
-    return [1, 2, 3]
+    return str(date3.year)+"/"+mounths[date3.month-1]+'/'+str(date3.day)

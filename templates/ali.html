@@ -5,8 +5,10 @@
     <title></title>
 </head>
 <body>
-    {% for exp in Experts %}
-        {{ exp.continent }}
-    {% endfor %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="sub">
+    </form>
 </body>
 </html>

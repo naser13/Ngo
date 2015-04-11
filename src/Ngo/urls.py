@@ -5,6 +5,7 @@ from django.conf import settings
 
 urlpatterns = patterns('',
                        url(r'^', include('Ngo.news.urls')),
+
                        url(r'^user/', include('Ngo.persons.urls')),
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^login/$', 'django.contrib.auth.views.login',

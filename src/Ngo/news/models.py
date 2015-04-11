@@ -1,5 +1,5 @@
 from django.db import models
-from src.Ngo.settings import MEDIA_ROOT
+from django.conf import settings
 
 
 class News(models.Model):
@@ -21,7 +21,7 @@ class News(models.Model):
     date = models.DateField(auto_now_add=True)  # have to change to jalali calender
     text = models.TextField()  # It is better for text to be as a text file because the valume of the text is alot
     description = models.CharField(max_length=100)
-    title_image = models.FileField(upload_to=MEDIA_ROOT)
+    title_image = models.FileField(upload_to=settings.MEDIA_ROOT)
     random_int = models.IntegerField()
 
     @classmethod
@@ -56,4 +56,4 @@ class Answer(models.Model):
 
 
 class Photo(models.Model):
-    pic = models.FileField(upload_to=MEDIA_ROOT)
+    pic = models.FileField(upload_to=settings.MEDIA_ROOT)

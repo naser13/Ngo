@@ -1,7 +1,13 @@
-<div class="item">
-    <img src="static/img/{{ news.image }}" alt="Chania">
-    <div class="carousel-caption">
-        <h4>{{ news.title }} 2</h4>
-        <p>{{ news.description }}</p>
-    </div>
-</div>
+{% load set_var %}
+{% if not flag  %}
+    {% include 'components/i_news_active.html' %}
+    {% set flag = 1 %}
+    {% else %}
+        <div class="item">
+            <img src="media/{{ news.random_int }}.jpg" alt="Chania">
+            <div class="carousel-caption">
+                <h4>{{ news.title }} </h4>
+                <p>{{ news.description }}</p>
+            </div>
+        </div>
+{% endif %}
