@@ -7,28 +7,9 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="static/img/img1.png" alt="Chania">
-
-                        <div class="carousel-caption" id="caption">
-                            <h4>Image 2</h4>
-                            <p>Image 2 Description</p>
-
-                        </div>
-
-                </div>
-
-                <div class="item">
-                    <img src="static/img/img2.png" alt="Chania">
-                        <div class="carousel-caption">
-
-                                <h3>Image 2</h3>
-                                <p>Image 2 Description</p>
-
-                        </div>
-
-                </div>
-
+                {% for news in i_news %}
+                    {% include 'components/i_news.html' %}
+                {% endfor %}
             </div>
 
             <!-- Left and right controls -->

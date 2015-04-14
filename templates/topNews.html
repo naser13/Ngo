@@ -8,30 +8,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td dir="rtl">
-                        <a id='news' href="#" class="thumbnail" style="text-decoration: none">
-                            <img id ="news_image" src="static/img/baaar.jpg">
-                            <h4>article1</h4>
-                            <div style="color: #000000;" >
-                                hello
-                            </div>
-                        </a>
-                    </td>
+                {% for news in r_news %}
+                    {% include 'components/r_news.html' %}
 
-                </tr>
-                <tr>
-                    <td dir="rtl">
-                        <a id='news' href="#" class="thumbnail" style="text-decoration: none">
-                            <img id ="news_image" src="static/img/baaar.jpg">
-                            <h4>article1</h4>
-                            <div style="color: #000000;" >
-                                hello
-                            </div>
-                        </a>
-                    </td>
-
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
         <div class="col-md-4">
