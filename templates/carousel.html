@@ -1,11 +1,24 @@
- <div id="myCarousel" class="carousel slide col-md-8" data-ride="carousel" style="height: 300px;">
+<div id="myCarousel" class="carousel slide col-md-8" data-ride="carousel" style="height: 300px;">
+
             <!-- Indicators -->
             <ol class="carousel-indicators">
+
+  {% comment %}
+            <ul>{% for i in 3|get_range %}
+              <li>{{ i }}
+              <li data-target="#myCarousel" data-slide-to=i</li>
+              </li>
+            {% endfor %}</ul>
+
+
+
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
+                {% endcomment %}
             </ol>
 
             <!-- Wrapper for slides -->
+
             <div class="carousel-inner" role="listbox">
                 {% for news in i_news %}
                     {% include 'components/i_news.html' %}
