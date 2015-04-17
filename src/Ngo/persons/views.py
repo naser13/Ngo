@@ -1,6 +1,6 @@
 from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render, redirect
-from Ngo.forms import AddAdmin, AddExpert
+from Ngo.forms import AddAdmin, AddExpert, Add_ngo
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 
@@ -23,7 +23,7 @@ def add_admin(request):
             form = AddAdmin()
             return render(request, 'ali.html', {'form': form})
     else:
-        return HttpResponseNotFound('<h1>Page not found</h1>')
+        return HttpResponseNotFound('<h1>404 Page not found</h1>')
 
 
 @user_passes_test(lambda u: u.is_superuser, login_url='login')
@@ -34,4 +34,15 @@ def add_expert(request):
     else:
         form = AddExpert()
     return render(request, 'ali.html', {'form': form})
+
+
+@user_passes_test(lambda u: u.is_superuser, login_url='login')
+def add_NGO(request):
+    if request.method == 'POST':
+        form = Add_ngo(request.POST)
+        form.save()
+        return redirect('http://127.0.0.1:8000/')
+    else:
+        form = Add_ngo()
+        return render(request, 'ali.html', {'form': form})
 

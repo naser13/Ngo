@@ -10,4 +10,5 @@ urlpatterns = patterns('Ngo.news.views',
                        url(r'^shownews/$', 'show_new_news'),
                        url(r'editnews/$', 'show_news'),
                        url(r'^accounts/profile/$', 'user_home'),
+                       url(r'^news/(\w{1,2})/$', 'filter_news'),
 )

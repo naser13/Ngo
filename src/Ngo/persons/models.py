@@ -38,5 +38,4 @@ class NGO (models.Model):
     )
 
     continent = models.CharField(max_length=2, choices=CATEGORIES)
-    title_picture = models.FileField(upload_to=settings.MEDIA_ROOT)
     Website = models.CharField(max_length=50)

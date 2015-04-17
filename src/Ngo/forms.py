@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from src.Ngo.persons.models import Expert, Admin
+from src.Ngo.persons.models import Expert, Admin,NGO
 from Ngo.news.models import News, Photo
 
 
@@ -94,3 +94,9 @@ class AddExpert(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class Add_ngo(forms.ModelForm):
+    class Meta:
+        model = NGO
+        fields = ['name', 'continent', 'Website']

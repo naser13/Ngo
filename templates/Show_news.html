@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load date %}
 {% block page_title %}{{ news.titel }}{% endblock %}
 {% block nav_list %}
     {% if not user.is_authenticated %}
@@ -23,7 +24,8 @@
 {% endblock %}
 {% block body %}
     <h4 style="color: blue;;" dir="rtl">{{ news.title }}</h4>
+    <div dir="rtl">{{ date }}</div>
     {% autoescape off %}
-        <div dir="rtl"> {{ news.text }}</div>
+        <div dir="rtl" style="background-color: #F2F2F2"> {{ news.text }}</div>
     {% endautoescape %}
 {% endblock %}
