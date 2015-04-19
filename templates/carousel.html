@@ -3,19 +3,15 @@
             <!-- Indicators -->
             <ol class="carousel-indicators">
 
-  {% comment %}
-            <ul>{% for i in 3|get_range %}
-              <li>{{ i }}
-              <li data-target="#myCarousel" data-slide-to=i</li>
-              </li>
-            {% endfor %}</ul>
 
 
 
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                { }
-                {% endcomment %}
+                {% for foo in n_size %}
+                    <li data-target="#myCarousel" data-slide-to="{{ foo }}"></li>
+                {% endfor %}
+
+
             </ol>
 
             <!-- Wrapper for slides -->
