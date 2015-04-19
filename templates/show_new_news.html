@@ -1,39 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Example of Bootstrap 3 Media Objects</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<style type="text/css">
-    .bs-example{
-    	margin: 20px;
-    }
-</style>
-</head>
-<body>
-<div class="bs-example">
-	<div class="media">
-        <a href="#" class="pull-left">
-            <img src="../images/avatar-tiny.jpg" class="media-object" alt="Sample Image">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">Jhon Carter <small><i>Posted on January 10, 2014</i></small></h4>
-            <p>Excellent feature! I love it. One day I'm definitely going to put this Bootstrap component into use and I'll let you know once I do.</p>
-        </div>
-    </div>
-    <hr />
-    <div class="media">
-        <a href="#" class="pull-right">
-            <img src="../images/avatar-tiny.jpg" class="media-object" alt="Sample Image">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">Jhon Carter <small><i>Posted on January 10, 2014</i></small></h4>
-            <p>Excellent feature! I love it. One day I'm definitely going to put this Bootstrap component into use and I'll let you know once I do.</p>
-        </div>
-    </div>
-</div>
-</body>
-</html>                                		
+{% extends 'base.html' %}
+{% block nav_body %}
+    {% include 'components/admin_navbarList.html' %}
+{% block body %}
+    <table border="0" class="col-md-8" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        <div align="right"> اخبار</div>
+                        <img id="line" style="" src="static/img/liine3.jpg" alt="">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for news in r_news %}
+                    {% include 'components/r_news.html' %}
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
