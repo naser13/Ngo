@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load date %}
+{% include 'head.html' %}
+<title>انجمن دوستی ایران و {{ page_title }}</title>
+<body>
+
+<div class="container" id="container">
+    <div class="row">
+        <img src="../../static/img/ngo_headers/germany.png" class="img-rounded" alt="Cinque Terre" id="TOP_IMAGE" width="100%" height="150">
+    </div>
+    <div class="row">
+
+        <nav class="navbar navbar-inverse col-md-12" height="10">
+            <div class="navbar-header" style="color: #ffffff;">
+                <div style="margin-top: 12px" dir="rtl"> {{ a|jalali }}</div>
+            </div>
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a>گالری تصاویر</a></li>
+                        <li><a>آشنایی با انجمن</a></li>
+                        <li><a>ارتباط با انجمن</a></li>
+                        <li><a>آرشیو اخبار </a></li>
+                    </ul>
+                </div>
+        </nav>
+    </div>
+    {% block body %}
+        <table border="0" class="col-md-8" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        <div align="right"> آخرین اخبار</div>
+                        <img id="line" style="" src="http://127.0.0.1:8000/static/img/liine3.jpg" alt="">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for news in r_news %}
+                    {% include 'components/r_news.html' %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    {% endblock %}
+</div>
+
+</body>
+</html>

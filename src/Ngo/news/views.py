@@ -6,13 +6,15 @@ from Ngo.forms import SignupForm, AddPicForm, AddArticleForm
 from random import randint
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Ngo.templatetags.date import Output
-from src.Ngo.persons.models import Admin
+from src.Ngo.persons.models import Admin, Expert
 
 
 def home(request):
     i_news = News.get_all_important_news()
     r_news = News.get_all_regular_news()
-    # date = datetime.now
+    expert = Admin.objects.get(username='admin')
+    print(expert.id)
+    return HttpResponse(expert.id)
     return render(request, 'home.html', {'i_news': i_news, 'r_news': r_news})
 
 #
@@ -35,7 +37,11 @@ def create_article(request):
         article.title = request.POST['title']
         article.description = request.POST['description']
         article.text = request.POST['text']
-        article.continent = request.POST['continent']
+        user = request.user
+        print(user.id)
+        expert = Expert.objects.get(id=4)
+        # print(len(expert))
+        # article.continent = expert.ngo.continent
         article.save()
         # form.save()
         print(request.POST['text'])
@@ -95,6 +101,10 @@ def user_home(request):
 def filter_news(request, continent):
     news = News.objects.filter(continent=continent)
     return render(request, 'show_new_news.html', {'n_news': news})
+
+
+def show_NGO(request, name):
+    return render(request, 'ngo/germany.html', {'page_title': name})
 
 
 def persian_date(news):

@@ -35,7 +35,7 @@ class AddAdmin(forms.ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput(), label='تکرار')
 
     class Meta:
-        model = User
+        model = Admin
         fields = ['username', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
@@ -68,11 +68,12 @@ class AddExpert(forms.ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput(), label='تکرار')
 
     class Meta:
-        model = User
-        fields = ['username', 'password1', 'password2']
+        model = Expert
+        fields = ['username', 'password1', 'password2', 'ngo']
 
     def __init__(self, *args, **kwargs):
         super(AddExpert, self).__init__(*args, **kwargs)
+        self.fields['ngo'].label = 'سمن'
         self.fields['username'].label = 'نام کاربری'
 
     def clean_password2(self):
@@ -97,6 +98,11 @@ class AddExpert(forms.ModelForm):
 
 
 class Add_ngo(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(Add_ngo, self).__init__(*args, **kwargs)
+        self.fields['name'].label = 'کشور سمن به فارسی'
+        self.fields['latin_name'].label = 'کشور سمن به انگلیسی'
+
     class Meta:
         model = NGO
-        fields = ['name', 'continent', 'Website']
+        fields = ['name', 'latin_name', 'continent']

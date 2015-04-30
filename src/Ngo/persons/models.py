@@ -3,31 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 
-class Expert(User):#karshenas
-    # CATEGORIES = (
-    #     ('as', 'آسیا'),
-    #     ('er', 'اروپا'),
-    #     ('am', 'آمریکا'),
-    #     ('au', 'استرالیا و اقیانوسیه'),
-    #     ('af', 'آفریقا'),
-    # )
-
-    class Meta:
-        verbose_name = 'کاربر'
-        verbose_name_plural = 'کاربران'
-
-    def __init__(self):
-        self.is_staff = True
-
-
-class Admin(User):
-
-    def __init__(self, *args, **kwargs):
-        self.is_staff = True
-        self.is_superuser = True
-
-
-class NGO (models.Model):
+class NGO(models.Model):
     name = models.CharField(max_length=100)
     CATEGORIES = (
         ('as', 'آسیا'),
@@ -37,5 +13,33 @@ class NGO (models.Model):
         ('af', 'آفریقا'),
     )
 
+    def __str__(self):
+        return self.name
+
     continent = models.CharField(max_length=2, choices=CATEGORIES)
     Website = models.CharField(max_length=50)
+    latin_name = models.CharField(max_length=20)
+
+
+class Expert(User):  # karshenas
+
+    class Meta:
+        verbose_name = 'کارشناس'
+        verbose_name_plural = 'کارشناسان'
+
+    ngo = models.ForeignKey(NGO)
+    ali = models.IntegerField()
+
+    def __init__(self, *args, **kwargs):
+        super(Expert, self).__init__()
+        self.is_staff = True
+
+    def get_Ngo(self):
+        return self.ngo
+
+
+class Admin(User):
+    def __init__(self, *args, **kwargs):
+        super(Admin, self).__init__()
+        self.is_staff = True
+        self.is_superuser = True

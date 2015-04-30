@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from src.Ngo.persons.models import NGO
 
 
 class News(models.Model):
@@ -15,6 +16,7 @@ class News(models.Model):
         ('au', 'استرالیا و اقیانوسیه'),
         ('af', 'آفریقا'),
     )
+    ngo = models.ForeignKey(NGO)
     title = models.CharField(max_length=50)
     continent = models.CharField(max_length=2, choices=CATEGORIES)
     status = models.CharField(default='n', max_length=1, choices=Categories)

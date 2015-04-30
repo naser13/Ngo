@@ -20,9 +20,6 @@ a{
 #relative{
     margin-top: 26px;
 }
-#container{
-    width: 980px;
-}
 .caret-up {
     width: 0;
     height: 0;
@@ -41,4 +38,11 @@ a{
 
 .dropdown-menu >li > a >div{
     float: right;
+}
+#caption {
+      opacity: 0.5;
+      position: absolute;
+      left: 0px;
+      width: 70%;
+      background-color: black;
 }
