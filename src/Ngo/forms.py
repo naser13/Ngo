@@ -106,3 +106,13 @@ class Add_ngo(forms.ModelForm):
     class Meta:
         model = NGO
         fields = ['name', 'latin_name', 'continent']
+
+
+class about_form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        self.fields['about'].widget.attrs.update({'id': 'summernote'})
+
+    class Meta:
+        model = NGO
+        fields = ['about']

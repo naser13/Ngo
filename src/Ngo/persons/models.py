@@ -19,6 +19,8 @@ class NGO(models.Model):
     continent = models.CharField(max_length=2, choices=CATEGORIES)
     Website = models.CharField(max_length=50)
     latin_name = models.CharField(max_length=20)
+    history = models.TextField()
+    about = models.TextField()
 
 
 class Expert(User):  # karshenas

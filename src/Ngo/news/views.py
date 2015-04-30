@@ -2,11 +2,11 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from Ngo.news.models import News, Answer
-from Ngo.forms import SignupForm, AddPicForm, AddArticleForm
+from Ngo.forms import SignupForm, AddPicForm, AddArticleForm, about_form
 from random import randint
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Ngo.templatetags.date import Output
-from src.Ngo.persons.models import Admin, Expert
+from src.Ngo.persons.models import Admin, Expert, NGO
 
 
 def home(request):
@@ -14,7 +14,7 @@ def home(request):
     r_news = News.get_all_regular_news()
     expert = Admin.objects.get(username='admin')
     print(expert.id)
-    return HttpResponse(expert.id)
+    # return HttpResponse(expert.id)
     return render(request, 'home.html', {'i_news': i_news, 'r_news': r_news})
 
 #
@@ -104,7 +104,22 @@ def filter_news(request, continent):
 
 
 def show_NGO(request, name):
-    return render(request, 'ngo/germany.html', {'page_title': name})
+    ngo = NGO.objects.get(latin_name=name)
+    return render(request, 'ngo/germany.html', {'page_title': name, 'ngo': ngo})
+
+
+def about_ngo(request, name):
+    if request.method == 'POST':
+        ngo = NGO.objects.get(latin_name=name)
+        print(request.POST['about'])
+        about = request.POST['about']
+        ngo.about = about
+        ngo.save()
+        # return redirect('http://127.0.0.1/ngo/'+name+'/about/')
+    ngo = NGO.objects.get(latin_name=name)
+    text = ngo.about
+    form = about_form()
+    return render(request, 'ngo/about.html', {'ngo': ngo, 'text': text, 'form': form})
 
 
 def persian_date(news):
