@@ -1,8 +1,9 @@
+import random
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
-from Ngo.forms import AddAdmin, AddExpert, Add_ngo
+from Ngo.forms import AddAdmin, AddExpert, Add_ngo, AddPicForm
 from django.contrib.auth.decorators import user_passes_test
-from src.Ngo.persons.models import Admin
+from src.Ngo.persons.models import Admin, NGO, Expert
 
 
 def user_home(request):
@@ -46,3 +47,17 @@ def add_NGO(request):
         form = Add_ngo()
         return render(request, 'ali.html', {'form': form})
 
+
+@user_passes_test(lambda u: u.is_staff, login_url='login')
+def add_pic(request):
+    if request.method == 'POST':
+        form = AddPicForm(request.POST, request.FILES)
+        photo = form.save(commit=False)
+        pic = photo.pic
+        integer = random.randint(100000, 100000000)
+        pic.name = str(integer)+'.jpg'
+        expert = Expert.objects.get(username=request.user.username)
+        photo.ngo = expert.ngo
+        photo.save()
+    form = AddPicForm()
+    return render(request, 'ngo/add_pic.html', {'form': form})

@@ -21,6 +21,7 @@ class NGO(models.Model):
     latin_name = models.CharField(max_length=20)
     history = models.TextField()
     about = models.TextField()
+    country = models.TextField()
 
 
 class Expert(User):  # karshenas
@@ -30,10 +31,9 @@ class Expert(User):  # karshenas
         verbose_name_plural = 'کارشناسان'
 
     ngo = models.ForeignKey(NGO)
-    ali = models.IntegerField()
 
     def __init__(self, *args, **kwargs):
-        super(Expert, self).__init__()
+        super(Expert, self).__init__(*args, **kwargs)
         self.is_staff = True
 
     def get_Ngo(self):
@@ -41,7 +41,8 @@ class Expert(User):  # karshenas
 
 
 class Admin(User):
+
     def __init__(self, *args, **kwargs):
-        super(Admin, self).__init__()
+        super(Admin, self).__init__(*args, **kwargs)
         self.is_staff = True
         self.is_superuser = True

@@ -1,6 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
-from src.Ngo.persons.models import Expert, Admin,NGO
+from src.Ngo.persons.models import Expert, Admin, NGO
 from Ngo.news.models import News, Photo
 
 
@@ -21,13 +20,21 @@ class AddArticleForm(forms.ModelForm):
 
     class Meta:
         model = News
-        fields = ['title', 'description', 'text', 'continent', 'title_image']
+        fields = ['title', 'description', 'text', 'title_image']
 
 
 class AddPicForm(forms.ModelForm):
     class Meta:
         model = Photo
-        fields = ['pic']
+        fields = ['pic', 'text']
+
+    def __init__(self):
+        super().__init__()
+        self.fields['pic'].label = 'تصویر'
+        self.fields['text'].label = 'توضیحات'
+        self.fields['text'].widget.attrs.update({'dir': 'rtl'})
+
+
 
 
 class AddAdmin(forms.ModelForm):
@@ -116,3 +123,13 @@ class about_form(forms.ModelForm):
     class Meta:
         model = NGO
         fields = ['about']
+
+
+class history_form(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        self.fields['history'].widget.attrs.update({'id': 'summernote'})
+
+    class Meta:
+        model = NGO
+        fields = ['history']

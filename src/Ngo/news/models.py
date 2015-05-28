@@ -11,7 +11,7 @@ class News(models.Model):
     )
     CATEGORIES = (
         ('as', 'آسیا'),
-        ('er', 'اروپا'),
+        ('eu', 'اروپا'),
         ('am', 'آمریکا'),
         ('au', 'استرالیا و اقیانوسیه'),
         ('af', 'آفریقا'),
@@ -24,7 +24,7 @@ class News(models.Model):
     text = models.TextField()  # It is better for text to be as a text file because the valume of the text is alot
     description = models.CharField(max_length=100)
     title_image = models.FileField(upload_to=settings.MEDIA_ROOT)
-    random_int = models.IntegerField()
+    random_int = models.CharField(max_length=32)
 
     @classmethod
     def get_all_news(cls):
@@ -59,3 +59,5 @@ class Answer(models.Model):
 
 class Photo(models.Model):
     pic = models.FileField(upload_to=settings.MEDIA_ROOT)
+    ngo = models.ForeignKey(NGO)
+    text = models.CharField(max_length=100)

@@ -6,4 +6,5 @@ urlpatterns = patterns('Ngo.persons.views',
                        url(r'^addadmin/$', 'add_admin'),
                        url(r'^addexpert/$', 'add_expert'),
                        url(r'^addngo/$', 'add_NGO'),
+                       url(r'^add_pic/$', 'add_pic'),
 )

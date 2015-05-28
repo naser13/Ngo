@@ -1,19 +1,16 @@
-from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from Ngo.news.models import News, Answer
-from Ngo.forms import SignupForm, AddPicForm, AddArticleForm, about_form
-from random import randint
+from Ngo.forms import AddArticleForm, about_form, history_form
+from django.utils.crypto import get_random_string
 from django.contrib.auth.decorators import login_required, user_passes_test
-from Ngo.templatetags.date import Output
+from Ngo.templatetags.date import Output, persian_date
 from src.Ngo.persons.models import Admin, Expert, NGO
 
 
 def home(request):
     i_news = News.get_all_important_news()
     r_news = News.get_all_regular_news()
-    expert = Admin.objects.get(username='admin')
-    print(expert.id)
     # return HttpResponse(expert.id)
     return render(request, 'home.html', {'i_news': i_news, 'r_news': r_news})
 
@@ -22,40 +19,35 @@ def home(request):
 
 @login_required(login_url='login')
 def create_article(request):
-    # return HttpResponse(request.method)
     if request.method == 'POST':
-        form2 = AddPicForm(request.POST, request.FILES)
-        picForm = form2.save(commit=False)
-        pic = picForm.pic
-        integer = randint(0, 10000000)
-        pic.name = str(integer)+'.jpg'
-        form2.save()
-        form = AddArticleForm(request.POST, request.FILES)
-        article = form.save(commit=False)
-        article.title_image.name = pic
-        article.random_int = integer
-        article.title = request.POST['title']
-        article.description = request.POST['description']
-        article.text = request.POST['text']
-        user = request.user
-        print(user.id)
-        expert = Expert.objects.get(id=4)
-        # print(len(expert))
-        # article.continent = expert.ngo.continent
-        article.save()
-        # form.save()
-        print(request.POST['text'])
-        return HttpResponse("done")
-
-    form = AddArticleForm()
-    form2 = AddPicForm()
-    return render(request, 'new_article.html', {'form': form, 'form2': form2})
+        print(request.POST)
+        print(request.FILES)
+        form = AddArticleForm(data=request.POST, files=request.FILES)
+        if True:
+            article = form.save(commit=False)
+            unique_id = get_random_string()
+            article.title_image = request.FILES['title_image']
+            article.title_image.name = str(unique_id)+'.jpg'
+            article.random_int = unique_id
+            article.title = request.POST['title']
+            article.description = request.POST['description']
+            article.text = request.POST['text']
+            expert = Expert.objects.get(username=request.user.username)
+            ngo = expert.ngo
+            article.continent = ngo.continent
+            article.ngo = ngo
+            article.save()
+            return redirect('http://127.0.0.1:8000/')
+        else:
+            return redirect('http://127.0.0.1:8000/')
+    else:
+        form = AddArticleForm()
+    return render(request, 'new_article.html', {'form': form})
 
 
 def edit(request):
     article = News.objects.get(id=1)
     return HttpResponse(article.text)
-    # return render(request, 'show_new_news.html')
 
 
 def show_article(request, id):
@@ -105,61 +97,46 @@ def filter_news(request, continent):
 
 def show_NGO(request, name):
     ngo = NGO.objects.get(latin_name=name)
-    return render(request, 'ngo/germany.html', {'page_title': name, 'ngo': ngo})
+    news = News.objects.filter(ngo=ngo)
+    form = about_form()
+    can_edit = False
+    if request.user.is_authenticated():
+        if not request.user.is_superuser:
+            expert = Expert.objects.get(username=request.user.username)
+            ngo_name = expert.get_Ngo().latin_name
+            if ngo_name == name:
+                can_edit = True
+    return render(request, 'ngo/germany.html', {'page_title': name, 'ngo': ngo, 'r_news': news, 'form': form, 'can_edit': can_edit})
 
 
-def about_ngo(request, name):
+def request_ngo(request, name, kind):
     if request.method == 'POST':
         ngo = NGO.objects.get(latin_name=name)
-        print(request.POST['about'])
-        about = request.POST['about']
-        ngo.about = about
+        if kind == 'about':
+            text = request.POST['about']
+            ngo.about = text
+        if kind == 'history':
+            text = request.POST['history']
+            ngo.history = text
+
+        if kind == 'country':
+            text = request.POST['about']
+            ngo.country = text
         ngo.save()
-        # return redirect('http://127.0.0.1/ngo/'+name+'/about/')
+        return redirect('http://127.0.0.1:8000/ngo/'+name+'/')
     ngo = NGO.objects.get(latin_name=name)
-    text = ngo.about
-    form = about_form()
-    return render(request, 'ngo/about.html', {'ngo': ngo, 'text': text, 'form': form})
-
-
-def persian_date(news):
-    day = news.date.day
-    month = news.date.month
-    year = news.date.year
-    date = datetime(year, month, day)
-
-    today = datetime(2015, 3, 21)
-    days = (date-today).days
-    day = 1
-    month = 1
-    year = 1394
-
-    while days > 0:
-        day += 1
-        if month <= 6 and day == 32:
-            day = 1
-            month += 1
-
-        if 6 < month < 12 and day == 31:
-            day = 1
-            month += 1
-
-        if day == 30 and month == 12:
-            if year % 1391 == 0:
-                day += 1
-            else:
-                day = 1
-                month = 1
-                year += 1
-
-        if day == 31 and month == 12 and year % 1391 ==0:
-            day = 1
-            month = 1
-            year += 1
-
-        days -= 1
-    mounths = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند']
-    weekdays = ['دوشنبه', 'سه شنبه', 'چهار شنبه', 'پنج شنبه', 'جمعه', 'شنبه', 'یکشنبه']
-
-    date3 = datetime(year, month, day)
-    return str(date3.day)+' - '+mounths[date3.month-1]+' - '+str(date3.year)+' '
+    can_edit = False
+    if request.user.is_authenticated():
+        if not request.user.is_superuser:
+            expert = Expert.objects.get(username=request.user.username)
+            ngo_name = expert.get_Ngo().latin_name
+            if ngo_name == name:
+                can_edit = True
+    if kind == 'about':
+        text = ngo.about
+        form = about_form()
+        return render(request, 'ngo/about.html', {'ngo': ngo, 'text': text, 'form': form, 'can_edit': can_edit})
+    if kind == 'history':
+        text = ngo.history
+        form = history_form()
+        return render(request, 'ngo/connect.html', {'ngo': ngo, 'text': text, 'form': form, 'can_edit': can_edit})

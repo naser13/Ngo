@@ -7,7 +7,7 @@
     <div dir="rtl">
     <h2 style="color: blue">درباره انجمن</h2>
         {% autoescape off %}
-            {% if  not user.is_authenticated %}
+            {% if  not can_edit %}
                 {{ text }}
                 {% else %}
                     <form action="" method="post">

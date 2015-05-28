@@ -17,34 +17,72 @@
             </div>
                 <div>
                     <ul class="nav navbar-nav navbar-right">
+                        {% if  user.is_authenticated %}
+                            <li><a href="http://127.0.0.1:8000/logout">خروج</a></li>
+                            {% else %}
+                            <li><a href="http://127.0.0.1:8000/login">ورود</a></li>
+                        {% endif %}
                         <li><a>گالری تصاویر</a></li>
-                        <li><a href="http://127.0.0.1:8000/ngo/{{ ngo.latin_name }}/about">آشنایی با انجمن</a></li>
-                        <li><a>ارتباط با انجمن</a></li>
-                        <li><a>آرشیو اخبار </a></li>
+                        <li><a href="http://127.0.0.1:8000/ngo/{{ ngo.latin_name }}/history">آشنایی با انجمن</a></li>
+                        <li><a href="http://127.0.0.1:8000/ngo/{{ ngo.latin_name }}/about">ارتباط با انجمن</a></li>
+                        <li><a href="http://127.0.0.1:8000/ngo/{{ ngo.latin_name }}/">صفحه اصلی</a></li>
+                        <li><a href="http://127.0.0.1:8000/">خانه</a></li>
                     </ul>
                 </div>
         </nav>
     </div>
     {% block body %}
-        <table border="0" class="col-md-8" id="table">
-            <thead>
-                <tr>
-                    <th>
-                        <div align="right"> آخرین اخبار</div>
-                        <img id="line" style="" src="http://127.0.0.1:8000/static/img/liine3.jpg" alt="">
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for news in r_news %}
-                    {% include 'components/r_news.html' %}
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="row" >
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" id="panel-header">
+                        گالری تصاویر
+                    </div>
+                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
+                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
+                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
+                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <table border="0" class="col-md-12">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div align="right"> آخرین اخبار</div>
+                                <img id="line" style="" src="http://127.0.0.1:8000/static/img/liine3.jpg" alt="">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for news in r_news %}
+                            {% include 'components/r_news.html' %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div align="right">درباره {{ ngo.name }}</div>
+                <img id="line" style="" src="http://127.0.0.1:8000/static/img/liine3.jpg" alt="">
+                {% autoescape off %}
+                    {% if  not can_edit %}
+                        <div dir="rtl"> {{ ngo.country }}</div>
+                        {% else %}
+                            <form action="country/" method="post">
+                                {% csrf_token %}
+                                {{ form }}
+                                <input type="submit" value="ثبت">
+                            </form>
+                    {% endif %}
+                {% endautoescape %}
 
+
+            </div>
+        </div>
 
     {% endblock %}
 </div>
-
+<script src="http://127.0.0.1:8000/static/js/edit.js"></script>
+<script>
+        $('#summernote').text('{{ ngo.country }}');
+</script>
 </body>
 </html>
