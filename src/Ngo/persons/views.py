@@ -1,8 +1,10 @@
 import random
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
+from django.utils.crypto import get_random_string
 from Ngo.forms import AddAdmin, AddExpert, Add_ngo, AddPicForm
 from django.contrib.auth.decorators import user_passes_test
+from Ngo.news.models import Photo
 from src.Ngo.persons.models import Admin, NGO, Expert
 
 
@@ -51,11 +53,14 @@ def add_NGO(request):
 @user_passes_test(lambda u: u.is_staff, login_url='login')
 def add_pic(request):
     if request.method == 'POST':
-        form = AddPicForm(request.POST, request.FILES)
-        photo = form.save(commit=False)
-        pic = photo.pic
-        integer = random.randint(100000, 100000000)
-        pic.name = str(integer)+'.jpg'
+        # form = AddPicForm(request.POST, request.FILES)
+        photo = Photo()
+        pic = request.FILES['pic']
+        name = get_random_string()
+        pic.name = name + '.jpg'
+        photo.pic = pic
+        photo.unique_id = name
+        photo.text = request.POST['text']
         expert = Expert.objects.get(username=request.user.username)
         photo.ngo = expert.ngo
         photo.save()

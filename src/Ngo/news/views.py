@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from Ngo.news.models import News, Answer
+from Ngo.news.models import News, Answer, Photo
 from Ngo.forms import AddArticleForm, about_form, history_form
 from django.utils.crypto import get_random_string
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -106,7 +106,8 @@ def show_NGO(request, name):
             ngo_name = expert.get_Ngo().latin_name
             if ngo_name == name:
                 can_edit = True
-    return render(request, 'ngo/germany.html', {'page_title': name, 'ngo': ngo, 'r_news': news, 'form': form, 'can_edit': can_edit})
+    photos = Photo.objects.filter(ngo=ngo)
+    return render(request, 'ngo/germany.html', {'page_title': name, 'ngo': ngo, 'r_news': news, 'form': form, 'can_edit': can_edit, 'pics': photos})
 
 
 def request_ngo(request, name, kind):
@@ -139,4 +140,4 @@ def request_ngo(request, name, kind):
     if kind == 'history':
         text = ngo.history
         form = history_form()
-        return render(request, 'ngo/connect.html', {'ngo': ngo, 'text': text, 'form': form, 'can_edit': can_edit})
+        return render(request, 'ngo/history.html', {'ngo': ngo, 'text': text, 'form': form, 'can_edit': can_edit})

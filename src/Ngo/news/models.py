@@ -58,6 +58,11 @@ class Answer(models.Model):
 
 
 class Photo(models.Model):
+
+    def __init__(self, *args, **kwargs):
+        super(Photo, self).__init__(*args, **kwargs)
+
     pic = models.FileField(upload_to=settings.MEDIA_ROOT)
+    unique_id = models.CharField(max_length=32)
     ngo = models.ForeignKey(NGO)
     text = models.CharField(max_length=100)

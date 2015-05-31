@@ -7,7 +7,7 @@ class NGO(models.Model):
     name = models.CharField(max_length=100)
     CATEGORIES = (
         ('as', 'آسیا'),
-        ('er', 'اروپا'),
+        ('eu', 'اروپا'),
         ('am', 'آمریکا'),
         ('au', 'استرالیا و اقیانوسیه'),
         ('af', 'آفریقا'),

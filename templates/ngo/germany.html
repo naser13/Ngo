@@ -38,10 +38,9 @@
                     <div class="panel-heading" id="panel-header">
                         گالری تصاویر
                     </div>
-                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
-                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
-                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
-                    <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
+                    {% for pic in pics %}
+                        <div class="row"><div class="col-md-2"></div> {% include 'ngo/picture.html' %}<div class="col-md-1"></div> </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="col-md-8">
@@ -84,5 +83,7 @@
 <script>
         $('#summernote').text('{{ ngo.country }}');
 </script>
+
+</div>
 </body>
 </html>

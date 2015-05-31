@@ -1,12 +1,11 @@
 <div class="col-sm-8" style="padding-top: 20px;">
-        <a href="{{ good.image_id }}" class="thumbnail " style="background-color: lightgray;" >
-          <img src="{{ MEDIA_URL }}{{ good.image_id }}.png" alt="..." style="width: 100%;height: 150px">
+        <a href="#" class="thumbnail " style="background-color: lightgray;"  data-toggle="modal"data-target="#{{ pic.unique_id }}">
+          <img src="http://127.0.0.1:8000/media/{{ pic.unique_id }}.jpg" alt="..." style="width: 100%;height: 150px">
           <div class="caption">
             <center>
-                <div dir="rtl"></div><br>
-                <div dir="rtl"> روز پیش</div>
+                {{ pic.text }}
             </center>
-
           </div>
         </a>
 </div>
+{% include 'ngo/modal.html' %}
